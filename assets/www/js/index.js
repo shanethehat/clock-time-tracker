@@ -38,16 +38,21 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
     	app.startClock();
-    	
+    	this.calendar = new Calendar();
+    	calendar.initialise(document.getElementById('dateRows'));
+    	var now = new Date();
+    	calendar.drawMonth(now.getMonth(), now.getYear());
     },
     startClock: function() {
-    	app.clockTimer = setInterval(function() {
-        	var date = new Date();
-        	var h = app.addZeros(date.getHours());
-        	var m = app.addZeros(date.getMinutes());
-        	var s = app.addZeros(date.getSeconds());
-        	document.getElementById('currentTime').innerHTML = h + ':' + m + ':' + s;
-        }, 1000);
+    	app.clockTimer = setInterval(this.updateTime, 1000);
+    	this.updateTime();
+    },
+    updateTime: function() {
+    	var date = new Date();
+    	var h = app.addZeros(date.getHours());
+    	var m = app.addZeros(date.getMinutes());
+    	var s = app.addZeros(date.getSeconds());
+    	document.getElementById('currentTime').innerHTML = h + ':' + m + ':' + s;
     },
     stopClock: function() {
     	window.clearInterval(app.clockTimer);

@@ -1,7 +1,7 @@
 /**
  * Calendar object controls the actions and display of the calendar view
  */
-var calendar = {
+var Calendar = {
 	/**
 	 * Constructor
 	 * 
@@ -22,11 +22,23 @@ var calendar = {
     	var date = new Date(year,month,1);
     	var daysInMonth = this.getDaysInMonth(date);
     	var daysDrawn = 0;
-    	var currentDay = 0;
+    	var startDay = date.getDay();
+    	
+    	// clear the existing calendar
+    	this.clearCalendar();
     	
     	// draw rows
     	while (daysDrawn < daysInMonth) {
     		var row = this.getRow();
+    		var content = '';
+    		for (i = 0; i < 7; i++) {
+    			if ((daysDrawn > 0 && daysDrawn < daysInMonth)) {
+    				content = ++daysDrawn;
+    			}
+    			var cell = this.getCell(content, content === '' ? '' : 'active');
+    			row.appendChild(cell);
+    		}
+    		this.target.appendChild(row);
     	}
     	
     	
