@@ -64,9 +64,14 @@ h2 {
 	font-size:1.5em;
 }
 
-.calendarWrapper {
+section {
+	display:none;
 	width:95%;
-	margin:0 auto;
+    margin:0 auto;
+}
+
+.calendarWrapper {
+	display:block;
 }
 
 .calendarTopBar {

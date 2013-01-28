@@ -124,6 +124,16 @@ var app = {
         document.getElementById('nextMonth').addEventListener('click', function(e) {
             app.calendar.drawNextMonth();
         }, true);
+    },
+    /**
+     * Calendar button click handler
+     * 
+     * @param event
+     * 
+     * @return void
+     */
+    onDaySelect: function(event) {
+    	console.log('calendar click: ' + event.target.innerHTML);
     }
     
 };

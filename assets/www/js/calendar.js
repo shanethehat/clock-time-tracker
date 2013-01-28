@@ -18,7 +18,7 @@ var Calendar = {
         'Tuesday',
         'Wednesday',
         'Thursday',
-        'Firday',
+        'Friday',
         'Saturday'
     ],
     
@@ -113,6 +113,7 @@ var Calendar = {
     	pusher.setAttribute('class', 'cellPusher');
     	content.setAttribute('class', 'cellContent');
     	content.innerHTML = c;
+    	if (c.toString().length) content.addEventListener('click', app.onDaySelect, false);
     	cell.appendChild(pusher);
     	cell.appendChild(content);
     	return cell;
