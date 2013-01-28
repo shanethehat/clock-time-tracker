@@ -1,5 +1,15 @@
 /**
- * Calendar object controls the actions and display of the calendar view
+ * Clock Time Tracker
+ *
+ * @copyright Copyright (c) 2013 Shane Auckland
+ * @license   http://shaneauckland.co.uk/BSD-License.txt New BSD License
+ * @author    Shane Auckland <shane.auckland@gmail.com>
+ */
+
+/**
+ * Calendar object
+ * 
+ * Controls the generation and display of the calendar display
  */
 var Calendar = {
     days: [
