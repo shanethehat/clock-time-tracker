@@ -48,6 +48,7 @@ var app = {
         switch(eventId) {
             case 'deviceready':
                 this.startClock();
+                this.initDb();
                 this.initCalendar();
                 break;
         }
@@ -94,6 +95,15 @@ var app = {
     	return num;
     },
     /**
+     * Start up the database object
+     * 
+     * @return void
+     */
+    initDb: function() {
+        this.db = Object.create(Db);
+        this.db.initialise();
+    },
+    /**
      * Start up the calendar object
      * 
      * @return void
@@ -109,11 +119,9 @@ var app = {
             this.calendar.getCurrentYear()
         );
         document.getElementById('prevMonth').addEventListener('click', function(e) {
-            e.preventDefault();
             app.calendar.drawPreviousMonth();
         }, true);
         document.getElementById('nextMonth').addEventListener('click', function(e) {
-            e.preventDefault();
             app.calendar.drawNextMonth();
         }, true);
     }
