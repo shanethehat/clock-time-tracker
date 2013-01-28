@@ -19,9 +19,6 @@ var Db = {
     initialise: function() {
         this.db = window.openDatabase('clockTimes', '1.0', 'Clock Times DB', 1000000);
         this.db.transaction(this.createTables, this.errorCallback, this.successCallback);
-        
-        this.db.transaction(this.testInsert, this.errorCallback, this.successCallBack);
-        this.db.transaction(this.testSelect, this.errorCallback, this.successCallBack);
     },
     /**
      * Create the required tables if not already existing
