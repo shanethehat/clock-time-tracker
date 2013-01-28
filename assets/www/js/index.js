@@ -20,6 +20,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        this.onDeviceReady();
     },
     // Bind Event Listeners
     //
@@ -38,10 +39,15 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
     	app.startClock();
-    	this.calendar = new Calendar();
-    	calendar.initialise(document.getElementById('dateRows'));
-    	var now = new Date();
-    	calendar.drawMonth(now.getMonth(), now.getYear());
+    	this.calendar = Object.create(Calendar);
+    	this.calendar.initialise(
+    	    document.getElementById('dateRows'),
+    	    document.getElementById('calendarTitle')
+        );
+    	this.calendar.drawMonth(
+    	    this.calendar.getCurrentMonth(), 
+    	    this.calendar.getCurrentYear()
+    	);
     },
     startClock: function() {
     	app.clockTimer = setInterval(this.updateTime, 1000);

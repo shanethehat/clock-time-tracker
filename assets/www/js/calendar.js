@@ -2,13 +2,38 @@
  * Calendar object controls the actions and display of the calendar view
  */
 var Calendar = {
+    days: [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Firday',
+        'Saturday'
+    ],
+    
+    months: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ],
 	/**
 	 * Constructor
 	 * 
 	 * @returns void
 	 */
-    initialise: function(target) {
+    initialise: function(target, textElement) {
     	this.target = target;
+    	this.textElement = textElement;
     },
     /**
      * Draws a month to the DOM
@@ -30,18 +55,17 @@ var Calendar = {
     	// draw rows
     	while (daysDrawn < daysInMonth) {
     		var row = this.getRow();
-    		var content = '';
     		for (i = 0; i < 7; i++) {
-    			if ((daysDrawn > 0 && daysDrawn < daysInMonth)) {
+    			var content = '';
+    			if ((i >= startDay && daysDrawn === 0) || (daysDrawn > 0 && daysDrawn < daysInMonth)) {
     				content = ++daysDrawn;
     			}
-    			var cell = this.getCell(content, content === '' ? '' : 'active');
+    			var cell = this.getCell(content, content === '' ? 'inactive' : 'active');
     			row.appendChild(cell);
     		}
     		this.target.appendChild(row);
     	}
-    	
-    	
+    	this.textElement.innerHTML = this.months[date.getMonth()] + ' ' + date.getFullYear();  	
     },
     /**
      * Removes all elements from the calendar container
@@ -79,7 +103,7 @@ var Calendar = {
     	pusher.setAttribute('class', 'cellPusher');
     	content.setAttribute('class', 'cellContent');
     	content.innerHTML = c;
-    	cell.appendChilld(pusher);
+    	cell.appendChild(pusher);
     	cell.appendChild(content);
     	return cell;
     },
@@ -100,5 +124,57 @@ var Calendar = {
     		return 31;
     	}
     	return 30;
+    },
+    /**
+     * Return the currently set month (0-11). If one is not defined then the 
+     * current month will be used.
+     * 
+     * @return Number
+     */
+    getCurrentMonth: function() {
+        if (window.localStorage.getItem('currentMonth') == undefined) {
+            // set now as the current month
+            var date = new Date();
+            this.setCurrentMonth(date.getMonth());
+        }
+        return window.localStorage.getItem('currentMonth');
+    },
+    /**
+     * Sets the current month to local storage
+     * 
+     * @param month Current month value (0-11)
+     * 
+     * @return void
+     */
+    setCurrentMonth: function(month) {
+        if (!isNaN(month) && month >= 0 && month <= 11) {
+            window.localStorage.setItem('currentMonth', month)
+        }
+    },
+    /**
+     * Return the currently set year. If one is not defined then the current 
+     * year will be used.
+     * 
+     * @return Number
+     */
+    getCurrentYear: function() {
+        if (window.localStorage.getItem('currentYear') == undefined) {
+            // set now as the current month
+            var date = new Date();
+            this.setCurrentYear(date.getFullYear());
+        }
+        return window.localStorage.getItem('currentYear');
+    },
+    /**
+     * Sets the current year to local storage
+     * 
+     * @param year Current year value
+     * 
+     * @return void
+     */
+    setCurrentYear: function(year) {
+        if (!isNaN(year)) {
+            window.localStorage.setItem('currentYear', year)
+        }
     }
 }

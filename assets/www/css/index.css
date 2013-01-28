@@ -20,11 +20,17 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
+html {
+	margin:0;
+	padding:0;
+}
+
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
+    
+    /*background-color:#E4E4E4;
     background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
@@ -35,9 +41,9 @@ body {
         color-stop(0, #A7A7A7),
         color-stop(0.51, #E4E4E4)
     );
-    background-attachment:fixed;
+    background-attachment:fixed;*/
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:12px;
+    font-size:0.7em;
     height:100%;
     margin:0px;
     padding:0px;
@@ -46,27 +52,64 @@ body {
 }
 
 /* Portrait layout (default) */
-.app {
-    height:50px;   
-    width:100%;                 /* text area width */
+.app {  
     text-align:center;
-    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+}
+
+h1 {
+    font-size:3em;
+    font-weight:bold;
+    padding:1em;
+    background-color:#689ce2;
+    color:#fff;
+}
+
+h2 {
+	font-weight:bold;
+	margin:.8em;
+	font-size:1.5em;
 }
 
 .calendarWrapper {
-	width:90%;
+	width:95%;
 	margin:0 auto;
+}
+
+.calendarTopBar {
+	padding:.6em 0 .6em 0;
+	margin:2em 0 2em 0;
+}
+
+.monthButton {
+	height:1.8em;
+	width:5em;
+}
+
+.prevMonth {
+	float:left;
+}
+
+.nextMonth {
+	float:right;
+}
+
+.calendarTitle {
+	font-size:1.8em;
 }
 
 .calendarCell {
 	display:inline-block;
 	position:relative;
-	width:13%;
+	width:14.2%;
 	text-align:center;
 }
 
 .cellPusher {
 	margin-top:100%;
+}
+
+.dayRow .cellPusher {
+	margin-top:65%;
 }
 
 .cellContent {
@@ -81,24 +124,18 @@ body {
     vertical-align:middle;
 }
 
+.calendarCell.inactive .cellContent {
+    background-color:rgba(200,200,200,.3);
+}
+
 /* Landscape layout (with min-width) */
 @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
     .app {
         background-position:left center;
-        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
-        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
-                                      /* offset horizontal: half of image width and text area width */
     }
 }
 
-h1 {
-    font-size:24px;
-    font-weight:normal;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
-    text-align:center;
-}
+
 
 @keyframes fade {
     from { opacity: 1.0; }
