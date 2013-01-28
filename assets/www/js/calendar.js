@@ -129,7 +129,7 @@ var Calendar = {
     	longMonths = [0, 2, 4, 6, 7, 9, 11];
     	if (month == 1) {
     		// February detected, check for leap year
-    		return new Date(year, 1, 29).getMonth() == 1 ? 29 : 28;
+    		return new Date(date.getFullYear(), 1, 29).getMonth() == 1 ? 29 : 28;
     	} else if (longMonths.indexOf(month) >= 0) {
     		return 31;
     	}
@@ -186,5 +186,45 @@ var Calendar = {
         if (!isNaN(year)) {
             window.localStorage.setItem('currentYear', year)
         }
-    }
+    },
+    /**
+     * Update the view with the previous month
+     * 
+     * @return void
+     */
+    drawPreviousMonth: function() {
+        var month = this.getCurrentMonth();
+        var year = this.getCurrentYear();
+        
+        if (month == 0) {
+            month = 11;
+            this.setCurrentYear(--year);
+        } else {
+            month--;
+        }
+        
+        this.setCurrentMonth(month);
+        
+        this.drawMonth(month, year);
+    },
+    /**
+     * Update the view with the next month
+     * 
+     * @return void
+     */
+    drawNextMonth: function() {
+        var month = this.getCurrentMonth();
+        var year = this.getCurrentYear();
+        
+        if (month == 11) {
+            month = 0;
+            this.setCurrentYear(++year);
+        } else {
+            month++;
+        }
+        
+        this.setCurrentMonth(month);
+        
+        this.drawMonth(month, year);
+    },
 }

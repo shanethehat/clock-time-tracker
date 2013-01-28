@@ -17,7 +17,7 @@ var app = {
      */
     initialize: function() {
         this.bindEvents();
-        this.onDeviceReady();
+        //this.onDeviceReady();
     },
     /**
      * Bind any device events that are required on startup. Common events are:
@@ -108,6 +108,14 @@ var app = {
             this.calendar.getCurrentMonth(), 
             this.calendar.getCurrentYear()
         );
+        document.getElementById('prevMonth').addEventListener('click', function(e) {
+            e.preventDefault();
+            app.calendar.drawPreviousMonth();
+        }, true);
+        document.getElementById('nextMonth').addEventListener('click', function(e) {
+            e.preventDefault();
+            app.calendar.drawNextMonth();
+        }, true);
     }
     
 };
