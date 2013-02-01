@@ -13,14 +13,14 @@
  */
 var Calendar = {
     days: [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday'
-    ],
+           'Sunday',
+           'Monday',
+           'Tuesday',
+           'Wednesday',
+           'Thursday',
+           'Friday',
+           'Saturday'
+       ],
     
     months: [
         'January',
@@ -113,7 +113,9 @@ var Calendar = {
     	pusher.setAttribute('class', 'cellPusher');
     	content.setAttribute('class', 'cellContent');
     	content.innerHTML = c;
-    	if (c.toString().length) content.addEventListener('click', app.onDaySelect, false);
+    	if (c.toString().length) {
+    	    content.addEventListener('click', app.onDaySelect, false);
+    	}
     	cell.appendChild(pusher);
     	cell.appendChild(content);
     	return cell;

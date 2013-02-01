@@ -134,6 +134,42 @@ var app = {
      */
     onDaySelect: function(event) {
     	console.log('calendar click: ' + event.target.innerHTML);
+    	app.daySelect(event.target.innerHTML);
+    },
+    /**
+     * Day select operation
+     * 
+     * @param day
+     * 
+     * @return void
+     */
+    daySelect: function(day) {
+        var date = new Date(this.calendar.getCurrentYear(), this.calendar.getCurrentMonth(), day);
+        this.day = Object.create(Day);
+        this.day.initialise(date, this.db);
+        document.getElementById('calendarDisplay').style.display = 'none';
+        document.getElementById('dayDisplay').style.display = 'block';
+        document.getElementById('backButton').addEventListener('click', this.onBackButton, false);
+    },
+    /**
+     * Day back button click handler
+     * 
+     * @param event
+     * 
+     * @return void
+     */
+    onBackButton: function(event) {
+        app.backButton();
+    },
+    /**
+     * Day back button action
+     * 
+     * @return void
+     */
+    backButton: function() {
+        delete this.day;
+        document.getElementById('calendarDisplay').style.display = 'block';
+        document.getElementById('dayDisplay').style.display = 'none';
+        document.getElementById('backButton').removeEventListener('click', this.onBackButton, false);
     }
-    
 };

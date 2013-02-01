@@ -24,7 +24,7 @@
             <h1>Clock Time Tracker</h1>
             <h2>Current time: <span id="currentTime"></span></h2>
             
-            <section class="calendarWrapper">
+            <section class="calendarWrapper" id="calendarDisplay">
             	<div class="calendar">
             		<div class="calendarTopBar">
             			<button class="prevMonth monthButton" id="prevMonth">Previous</button>
@@ -62,14 +62,18 @@
             	</div>
             </section>
             
-            <section class="dayDisplay">
+            <section class="dayDisplay" id="dayDisplay">
                 <button class="backButton" id="backButton">Back to calendar</button>
+                <h3 id="dayTitle"></h3>
+                <p id="currentBalance"></p>
+                <div id="timesDisplay"></div>
             </section>
         </div>
         <script src="cordova-2.2.0.js"></script>
         <script src="js/index.js"></script>
         <script src="js/calendar.js"></script>
         <script src="js/db.js"></script>
+        <script src="js/day.js"></script>
         <script>
             app.initialize();
         </script>

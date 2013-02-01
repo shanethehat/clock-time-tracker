@@ -23,6 +23,8 @@ var Db = {
     /**
      * Create the required tables if not already existing
      * 
+     * @param dbh Database handler
+     * 
      * @return void
      */
     createTables: function(dbh) {
@@ -42,9 +44,57 @@ var Db = {
     /**
      * Generic error callback
      * 
+     * @param error Error object
+     * 
      * @return void
      */
     errorCallback: function(error) {
         alert('Database error: ' + error.message);
+    },
+    /**
+     * Load all the times for a given date
+     * 
+     * @param callback
+     * 
+     * @return Array
+     */
+    loadTimesForDay: function(date, callback) {
+        this.loadTimesForDayCallback = callback;
+        this.loadTimesDate = date;
+        this.db.transaction(this.loadTimes, this.errorCallback, this.successCallback);
+    },
+    /**
+     * Run the load times query
+     * 
+     * @param dbh Database handler
+     * 
+     * @return void
+     */
+    loadTimes: function(dbh) {
+        var date = app.db.loadTimesDate.getFullYear()+'-'+app.addZeros(app.db.loadTimesDate.getMonth() + 1)+'-'+app.addZeros(app.db.loadTimesDate.getDate() + 1);
+        var query = 'SELECT days.balance, time.time FROM days, time WHERE days.date = "'+date+'"';
+        dbh.executeSql(query, [], app.db.loadTimesSuccess, app.db.errorCallback);
+    },
+    /**
+     * Handle load times success
+     * 
+     * @param dbh    Database handler
+     * @param result Result object
+     * 
+     * @return void
+     */
+    loadTimesSuccess: function(dbh, result) {
+        var len = result.rows.length;
+        if (len == 0) {
+            app.db.loadTimesForDayCallback(null);
+            return;
+        }
+        
+        var response = {balance: result.rows.item(0).balance, times: []};
+        for (var i = 0; i < len; i++) {
+            response.times.push(result.rows.item(i).time);
+        }
+        
+        app.db.loadTimesForDayCallback(response);
     }
 };
