@@ -23,6 +23,8 @@ var Day = {
         
         this.db.loadTimesForDay(this.date, this.loadTimesCallback);
         this.setDateDisplay();
+        
+        document.getElementById('timeInput').addEventListener('submit', this.onFormSubmit, false);
     },
     /**
      * Sets the current day text
@@ -77,5 +79,26 @@ var Day = {
                 
             }
         }
+    },
+    /**
+     * Form submission handler
+     * 
+     * @param event
+     * 
+     * @return void
+     */
+    onFormSubmit: function(event) {
+        event.preventDefault();
+        app.day.handleForm(event.target);
+    },
+    /**
+     * Form handler (scoped)
+     * 
+     * @param form
+     * 
+     * @return void
+     */
+    handleForm: function(form) {
+        
     }
 };
